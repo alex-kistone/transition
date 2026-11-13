@@ -180,7 +180,7 @@ ${header}
   <div class="about">
     <div>
       <span class="kicker">Le cabinet</span>
-      <h2 style="margin-top:18px">L'expertise d'un dirigeant, la réactivité d'un cabinet.</h2>
+      <h2 style="margin-top:18px">L'expertise d'un dirigeant, le réseau d'un cabinet.</h2>
       <figure class="portrait"><img src="assets/alexandre-guego.jpg" alt="Alexandre Guégo, associé fondateur" width="900" height="1349" loading="lazy"></figure>
     </div>
     <div class="about-text">
