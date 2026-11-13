@@ -181,12 +181,13 @@ ${header}
     <div>
       <span class="kicker">Le cabinet</span>
       <h2 style="margin-top:18px">L'expertise d'un dirigeant, la réactivité d'un cabinet.</h2>
+      <figure class="portrait"><img src="assets/alexandre-guego.jpg" alt="Alexandre Guégo, associé fondateur" width="900" height="1349" loading="lazy"></figure>
     </div>
     <div class="about-text">
       <p>Quand une fonction clé se libère ou qu'une situation se tend, le temps joue contre l'entreprise. Notre métier : y répondre en quelques jours, avec la bonne personne.</p>
       <p>Nous accompagnons les dirigeants, actionnaires et conseils d'administration de PME, d'ETI et de groupes. Chaque mission est confiée à un manager qui a déjà mené des situations comparables, et suivie par un associé du cabinet jusqu'à son terme.</p>
       <p>Notre réseau réunit d'anciens directeurs généraux, directeurs financiers, DRH, directeurs industriels et directeurs des systèmes d'information, sélectionnés pour leur expérience, leur sens de l'engagement et leur discrétion.</p>
-      <div class="signature"><span class="ph">[Photo]</span><div><b>[Prénom Nom]</b><span>Associé fondateur</span></div></div>
+      <div class="signature"><img class="ph" src="assets/alexandre-guego-avatar.jpg" alt="" width="52" height="52"><div><b>Alexandre Guégo</b><span>Associé fondateur</span></div></div>
     </div>
   </div>
   <div class="pillars">

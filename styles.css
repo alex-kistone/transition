@@ -126,11 +126,14 @@ form.error ~ .form-err { display: block; }
 .sec-head.single { grid-template-columns: 1fr; max-width: 760px; gap: 18px; }
 
 /* Le cabinet */
-.about { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; }
-.about-text { display: grid; gap: 20px; color: var(--text); font-size: 17px; }
+.about { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
+.about-text { display: grid; align-content: start; gap: 20px; color: var(--text); font-size: 17px; }
 .about-text p:first-child { font-family: var(--display); font-size: 24px; line-height: 1.4; color: var(--ink); letter-spacing: -.01em; font-weight: 500; }
 .signature { display: flex; align-items: center; gap: 14px; padding-top: 12px; }
 .signature .ph { width: 52px; height: 52px; border-radius: 99px; background: var(--secondary); display: grid; place-items: center; font-family: var(--mono); font-size: 11px; color: var(--subtle); }
+.signature img.ph { object-fit: cover; }
+.portrait { margin: 40px 0 0; max-width: 420px; }
+.portrait img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: 20px; box-shadow: 0 24px 48px -28px rgba(60,40,20,.35); }
 .signature b { display: block; color: var(--ink); font-size: 15px; }
 .signature span { font-size: 13px; }
 .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 72px; border-top: 1px solid var(--line); }

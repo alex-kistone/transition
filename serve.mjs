@@ -1,5 +1,6 @@
 // Serveur local sans dépendance.
 //   npm run dev   → régénère les pages, sert le site sur http://localhost:3000 et recharge le navigateur à chaque modification
+//   npm run live  → comme dev, et récupère automatiquement les mises à jour du dépôt GitHub (git pull toutes les 15 s)
 //   npm start     → sert le site, sans surveillance
 // Autre port : PORT=4000 npm run dev
 import { createServer } from 'node:http';
@@ -61,4 +62,13 @@ if (dev) {
     }, 120);
   };
   watch(root, { recursive: true }, (_e, f) => onChange(f));
+}
+
+if (process.argv.includes('--sync')) {
+  const pull = () => execFile('git', ['pull', '--ff-only', '--quiet'], { cwd: root }, (err, _out, errOut) => {
+    if (err) console.error('Synchronisation impossible :', (errOut || err.message).trim());
+  });
+  pull();
+  setInterval(pull, 15000);
+  console.log('Synchronisation avec GitHub toutes les 15 s');
 }
