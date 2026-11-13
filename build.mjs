@@ -44,7 +44,7 @@ const header = `
     <a href="./#garanties">Garanties</a>
     <a href="./#faq">Questions</a>
   </nav>
-  <a class="btn btn-dark btn-sm" href="./#contact">Demander une intervention</a>
+  <a class="btn btn-dark btn-sm" href="./#contact">Trouver un manager</a>
 </div></header>`;
 
 const callback = (title, sub, selected, compact = false) => {
@@ -77,7 +77,7 @@ const footer = `
     </div>
     <div><h4>Expertises</h4><ul>${roles.slice(0, 5).map((r) => `<li><a href="${href(r)}">${r.short}</a></li>`).join('')}</ul></div>
     <div><h4>&nbsp;</h4><ul>${roles.slice(5).map((r) => `<li><a href="${href(r)}">${r.short}</a></li>`).join('')}</ul></div>
-    <div><h4>Contact</h4><ul><li>[Adresse du cabinet]</li><li>[Téléphone]</li><li>[E-mail de contact]</li><li><a href="./#contact">Demander une intervention</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>[Adresse du cabinet]</li><li>[Téléphone]</li><li>[E-mail de contact]</li><li><a href="./#contact">Trouver un manager</a></li></ul></div>
   </div>
   <div class="footer-legal"><span>© 2026 ${BRAND}</span><span>[Mentions légales] · [Politique de confidentialité]</span></div>
 </div></footer>
@@ -150,7 +150,7 @@ ${header}
       <h1>Des dirigeants d'expérience pour <em>les moments décisifs</em> de votre entreprise.</h1>
       <p class="lead">Direction générale, finance, ressources humaines, opérations : nous mettons à votre disposition des managers de transition confirmés, en poste sous une semaine, avec un mandat et des objectifs clairs.</p>
       <div class="hero-actions">
-        <a class="btn btn-green" href="#contact">Demander une intervention</a>
+        <a class="btn btn-green" href="#contact">Trouver un manager</a>
         <a class="btn btn-line" href="#expertises">Nos expertises</a>
       </div>
       <div class="hero-proof">
@@ -268,7 +268,7 @@ ${header}
         <li>${check}<div><b>Au cabinet</b>[Adresse du cabinet]</div></li>
       </ul>
     </div>
-    ${callback('Demander une intervention', 'Tous les champs sont confidentiels et ne servent qu\'à préparer notre échange.', '')}
+    ${callback('Trouver un manager', 'Tous les champs sont confidentiels et ne servent qu\'à préparer notre échange.', '')}
   </div>
 </section>
 </main>
