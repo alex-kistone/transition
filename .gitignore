@@ -3,3 +3,6 @@ node_modules/
 .vercel/
 .env
 .env.local
+
+# Captures de test
+/*.png
