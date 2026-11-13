@@ -365,20 +365,15 @@ document.querySelectorAll('form[data-contact]').forEach((f) => f.addEventListene
   const data = Object.fromEntries(new FormData(f));
   data['Formulaire'] = f.dataset.source;
   data['Page'] = document.title;
-  data['_subject'] = 'Nouvelle demande : ' + (data['Fonction recherchée'] || '') + ' · ' + (data['Entreprise'] || '');
-  data['_template'] = 'table';
   try {
-    const r = await fetch("https://formsubmit.co/ajax/aguego@kistone.fr", { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+    const r = await fetch("/api/contact", { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
     const j = await r.json().catch(() => ({}));
-    if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || ('HTTP ' + r.status));
+    if (!r.ok || !j.ok) throw new Error(j.error || ('HTTP ' + r.status));
     f.classList.add('sent'); btn.textContent = 'Demande envoyée';
   } catch (err) {
     console.error('Envoi du formulaire :', err);
     const box = f.parentElement.querySelector('.form-err');
-    const msg = String(err && err.message || '');
-    box.textContent = /activat/i.test(msg)
-      ? 'Formulaire en attente d’activation : un e-mail « Activate Form » vient d’être envoyé à l’adresse de réception. Cliquez sur le lien, puis renvoyez le formulaire.'
-      : 'L’envoi n’a pas abouti (' + (msg || 'réseau') + '). Réessayez ou appelez-nous au [Téléphone].';
+    box.textContent = 'L’envoi n’a pas abouti : ' + (err && err.message || 'erreur réseau') + ' Réessayez dans un instant.';
     f.classList.add('error'); btn.disabled = false; btn.textContent = label;
   }
 }));

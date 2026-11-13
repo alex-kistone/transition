@@ -9,8 +9,16 @@ import { watch } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readFileSync, existsSync } from 'node:fs';
+import { sendContact } from './lib/contact.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
+// Charge .env (clé Resend…) sans dépendance
+const envFile = join(root, '.env');
+if (existsSync(envFile)) for (const line of readFileSync(envFile, 'utf8').split(/\r?\n/)) {
+  const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
+  if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^(['"])(.*)\1$/, '$2');
+}
 const port = Number(process.env.PORT) || 3000;
 const dev = process.argv.includes('--watch');
 const types = {
@@ -18,7 +26,7 @@ const types = {
   '.mjs': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg',
   '.webp': 'image/webp', '.ico': 'image/x-icon', '.json': 'application/json',
 };
-const blocked = /^\/(src|node_modules|serve\.mjs|build\.mjs|package\.json)/;
+const blocked = /^\/(src|lib|api|node_modules|serve\.mjs|build\.mjs|package\.json|\.env)/;
 const clients = new Set();
 const reloadScript = `<script>new EventSource('/__reload').onmessage = () => location.reload();</script>`;
 
@@ -37,6 +45,13 @@ createServer(async (req, res) => {
     res.writeHead(200, { 'content-type': 'text/event-stream', 'cache-control': 'no-cache', connection: 'keep-alive' });
     res.write(': ok\n\n'); clients.add(res); req.on('close', () => clients.delete(res));
     return;
+  }
+  if (path === '/api/contact' && req.method === 'POST') {
+    let raw = ''; for await (const chunk of req) raw += chunk;
+    let data = {}; try { data = JSON.parse(raw || '{}'); } catch {}
+    const { status, body } = await sendContact(data).catch((e) => (console.error(e), { status: 500, body: { ok: false, error: 'Erreur serveur' } }));
+    res.writeHead(status, { 'content-type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify(body));
   }
   const file = blocked.test(path) ? null : await resolve(path);
   if (!file) { res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }); return res.end('Page introuvable'); }

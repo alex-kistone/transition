@@ -4,9 +4,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { roles, icons } from './src/data.mjs';
 
 const BRAND = 'Kistone Transition';
-// Destinataire des formulaires : service FormSubmit (aucun serveur). Pour changer d'adresse, modifier ici puis `node build.mjs`.
-const FORM_TO = 'aguego@kistone.fr';
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_TO}`;
+// Les formulaires sont envoyés à /api/contact (lib/contact.mjs → Resend). Destinataire : CONTACT_TO, par défaut aguego@kistone.fr.
+const FORM_ENDPOINT = '/api/contact';
 const out = new URL('./', import.meta.url);
 const boltSvg = readFileSync(new URL('assets/bolt.svg', import.meta.url), 'utf8')
   .replace(/<\?xml[^>]*>\s*/, '').replace(/<title>.*?<\/title>/, '')
@@ -91,20 +90,15 @@ document.querySelectorAll('form[data-contact]').forEach((f) => f.addEventListene
   const data = Object.fromEntries(new FormData(f));
   data['Formulaire'] = f.dataset.source;
   data['Page'] = document.title;
-  data['_subject'] = 'Nouvelle demande : ' + (data['Fonction recherchée'] || '') + ' · ' + (data['Entreprise'] || '');
-  data['_template'] = 'table';
   try {
-    const r = await fetch(${JSON.stringify(FORM_ENDPOINT)}, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+    const r = await fetch(${JSON.stringify(FORM_ENDPOINT)}, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
     const j = await r.json().catch(() => ({}));
-    if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || ('HTTP ' + r.status));
+    if (!r.ok || !j.ok) throw new Error(j.error || ('HTTP ' + r.status));
     f.classList.add('sent'); btn.textContent = 'Demande envoyée';
   } catch (err) {
     console.error('Envoi du formulaire :', err);
     const box = f.parentElement.querySelector('.form-err');
-    const msg = String(err && err.message || '');
-    box.textContent = /activat/i.test(msg)
-      ? 'Formulaire en attente d’activation : un e-mail « Activate Form » vient d’être envoyé à l’adresse de réception. Cliquez sur le lien, puis renvoyez le formulaire.'
-      : 'L’envoi n’a pas abouti (' + (msg || 'réseau') + '). Réessayez ou appelez-nous au [Téléphone].';
+    box.textContent = 'L’envoi n’a pas abouti : ' + (err && err.message || 'erreur réseau') + ' Réessayez dans un instant.';
     f.classList.add('error'); btn.disabled = false; btn.textContent = label;
   }
 }));

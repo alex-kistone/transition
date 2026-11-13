@@ -63,7 +63,7 @@ p { margin: 0; }
 .arrow-link:hover { color: var(--green-text); }
 
 /* En-tête */
-.header { position: sticky; top: 0; z-index: 40; background: var(--paper); border-bottom: 1px solid var(--line); }
+.header { position: sticky; top: 0; z-index: 40; background: var(--green); border-bottom: 1px solid rgba(20,19,18,.08); }
 .header .wrap { display: flex; align-items: center; height: 80px; gap: 32px; }
 .logo { display: flex; align-items: center; gap: 14px; }
 .logo img { height: 34px; width: auto; }
@@ -71,9 +71,9 @@ p { margin: 0; }
 .header .logo span { display: none; }
 .menu { white-space: nowrap; }
 .logo span { font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--subtle); border-left: 1px solid var(--line); padding-left: 14px; line-height: 1.5; }
-.menu { display: flex; gap: 30px; font-size: 15px; font-weight: 500; color: var(--text); }
+.menu { display: flex; gap: 30px; font-size: 15px; font-weight: 500; color: var(--ink); }
 .menu a { padding: 28px 0; border-bottom: 2px solid transparent; }
-.menu a:hover { color: var(--ink); border-bottom-color: var(--green-mid); }
+.menu a:hover { color: var(--ink); border-bottom-color: var(--ink); }
 .header .btn { margin-left: auto; }
 
 /* Hero */
