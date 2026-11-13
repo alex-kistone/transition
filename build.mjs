@@ -47,7 +47,17 @@ const header = `
     <a href="./#faq">Questions</a>
   </nav>
   <a class="btn btn-dark btn-sm" href="./#contact">Trouver un manager</a>
-</div></header>`;
+  <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+</div>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobile" hidden>
+  <a href="./#cabinet">Le cabinet</a>
+  <a href="./#expertises">Expertises</a>
+  <a href="./#methodologie">Méthodologie</a>
+  <a href="./#garanties">Garanties</a>
+  <a href="./#faq">Questions</a>
+  <a class="btn btn-dark btn-block" href="./#contact">Trouver un manager</a>
+</nav>
+</header>`;
 
 const callback = (title, sub, selected, compact = false) => {
   const k = `${selected || 'x'}${compact ? 's' : ''}`;
@@ -61,11 +71,11 @@ const callback = (title, sub, selected, compact = false) => {
     <div class="field"><label for="t-${k}">Téléphone</label><input id="t-${k}" name="Téléphone" type="tel" autocomplete="tel" required></div>
     <div class="field"><label for="f-${k}">Fonction recherchée</label><select id="f-${k}" name="Fonction recherchée">${roles.map((r) => `<option${r.slug === selected ? ' selected' : ''}>${r.short}</option>`).join('')}<option>Autre</option></select></div>
     ${compact ? '' : `<div class="field full"><label for="m-${k}">Votre situation, en quelques mots</label><textarea id="m-${k}" name="Message" placeholder="Contexte, urgence, durée envisagée, localisation…"></textarea></div>`}
-    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
     <div class="${compact ? '' : 'full'}"><button class="btn btn-green btn-block" type="submit">Être rappelé·e par un associé</button></div>
   </form>
   <div class="form-ok" role="status">Merci. Un associé vous rappelle sous 24 h ouvrées.</div>
-  <div class="form-err" role="alert">L'envoi n'a pas abouti. Réessayez ou appelez-nous au [Téléphone].</div>
+  <div class="form-err" role="alert">L'envoi n'a pas abouti. Réessayez dans un instant.</div>
   <div class="secure">${lock} Échange strictement confidentiel. Réponse sous 24 h ouvrées.</div>
 </div>`;
 };
@@ -79,11 +89,19 @@ const footer = `
     </div>
     <div><h4>Expertises</h4><ul>${roles.slice(0, 5).map((r) => `<li><a href="${href(r)}">${r.short}</a></li>`).join('')}</ul></div>
     <div><h4>&nbsp;</h4><ul>${roles.slice(5).map((r) => `<li><a href="${href(r)}">${r.short}</a></li>`).join('')}</ul></div>
-    <div><h4>Contact</h4><ul><li>[Adresse du cabinet]</li><li>[Téléphone]</li><li>[E-mail de contact]</li><li><a href="./#contact">Trouver un manager</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="./#contact">Trouver un manager</a></li><li><a href="./#faq">Questions fréquentes</a></li></ul></div>
   </div>
   <div class="footer-legal"><span>© 2026 ${BRAND}</span><span>[Mentions légales] · [Politique de confidentialité]</span></div>
 </div></footer>
 <script>
+(() => {
+  const burger = document.querySelector('.burger'), menu = document.getElementById('mobile-menu');
+  const set = (open) => { burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu'); menu.hidden = !open; document.body.classList.toggle('menu-open', open); };
+  burger.addEventListener('click', () => set(menu.hidden));
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  addEventListener('resize', () => { if (innerWidth > 1080) set(false); });
+})();
 document.querySelectorAll('form[data-contact]').forEach((f) => f.addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = f.querySelector('button[type=submit]');
@@ -265,9 +283,9 @@ ${header}
       <h2 style="margin-top:18px">Parlons de votre situation, en toute confidentialité.</h2>
       <p class="lead" style="margin-top:20px">Un associé du cabinet vous rappelle pour comprendre votre contexte et vous proposer, le cas échéant, une short-list sous 48 heures.</p>
       <ul class="contact-list">
-        <li>${check}<div><b>Par téléphone</b>[Téléphone], du lundi au vendredi</div></li>
-        <li>${check}<div><b>Par e-mail</b>[E-mail de contact]</div></li>
-        <li>${check}<div><b>Au cabinet</b>[Adresse du cabinet]</div></li>
+        <li>${check}<div><b>Confidentiel</b>Votre demande n'est lue que par un associé du cabinet</div></li>
+        <li>${check}<div><b>Rappel sous 24 h ouvrées</b>Pour comprendre votre contexte et vos enjeux</div></li>
+        <li>${check}<div><b>Short-list sous 48 heures</b>Des managers ayant déjà mené des missions comparables</div></li>
       </ul>
     </div>
     ${callback('Trouver un manager', 'Tous les champs sont confidentiels et ne servent qu\'à préparer notre échange.', '')}
@@ -319,7 +337,7 @@ ${header}
     ${callback('Recevoir des profils', 'Short-list de managers sous 48 heures.', r.slug, true)}
     <div class="side-box">
       <b>Préférez-vous en parler ?</b>
-      <span>Un associé vous répond au [Téléphone], du lundi au vendredi.</span>
+      <span>Laissez votre numéro dans le formulaire : un associé vous rappelle sous 24 h ouvrées.</span>
       <button class="btn btn-line btn-sm" type="button" onclick="window.print()">Imprimer la fiche</button>
     </div>
   </aside>

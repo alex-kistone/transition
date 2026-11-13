@@ -25,7 +25,17 @@
     <a href="./#faq">Questions</a>
   </nav>
   <a class="btn btn-dark btn-sm" href="./#contact">Trouver un manager</a>
-</div></header>
+  <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+</div>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobile" hidden>
+  <a href="./#cabinet">Le cabinet</a>
+  <a href="./#expertises">Expertises</a>
+  <a href="./#methodologie">Méthodologie</a>
+  <a href="./#garanties">Garanties</a>
+  <a href="./#faq">Questions</a>
+  <a class="btn btn-dark btn-block" href="./#contact">Trouver un manager</a>
+</nav>
+</header>
 <main>
 <section class="job-head on-dark">
   <div class="watermark " style="width:420px;height:690px;right:-60px;top:-140px;transform:rotate(12deg)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 469.343 770.461" aria-hidden="true">
@@ -105,16 +115,16 @@ l-1060 0 -180 -102z m1490 -126 c-27 -16 -75 -42 -105 -59 -30 -17 -95 -53
     <div class="field"><label for="t-logistiques">Téléphone</label><input id="t-logistiques" name="Téléphone" type="tel" autocomplete="tel" required></div>
     <div class="field"><label for="f-logistiques">Fonction recherchée</label><select id="f-logistiques" name="Fonction recherchée"><option>Direction générale</option><option>Finance</option><option>Ressources humaines</option><option selected>Logistique</option><option>Commerce</option><option>Marketing</option><option>Juridique</option><option>RSE</option><option>DSI et innovation digitale</option><option>Opérations industrielles</option><option>Autre</option></select></div>
     
-    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
     <div class=""><button class="btn btn-green btn-block" type="submit">Être rappelé·e par un associé</button></div>
   </form>
   <div class="form-ok" role="status">Merci. Un associé vous rappelle sous 24 h ouvrées.</div>
-  <div class="form-err" role="alert">L'envoi n'a pas abouti. Réessayez ou appelez-nous au [Téléphone].</div>
+  <div class="form-err" role="alert">L'envoi n'a pas abouti. Réessayez dans un instant.</div>
   <div class="secure"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Échange strictement confidentiel. Réponse sous 24 h ouvrées.</div>
 </div>
     <div class="side-box">
       <b>Préférez-vous en parler ?</b>
-      <span>Un associé vous répond au [Téléphone], du lundi au vendredi.</span>
+      <span>Laissez votre numéro dans le formulaire : un associé vous rappelle sous 24 h ouvrées.</span>
       <button class="btn btn-line btn-sm" type="button" onclick="window.print()">Imprimer la fiche</button>
     </div>
   </aside>
@@ -134,11 +144,19 @@ l-1060 0 -180 -102z m1490 -126 c-27 -16 -75 -42 -105 -59 -30 -17 -95 -53
     </div>
     <div><h4>Expertises</h4><ul><li><a href="poste-direction-generale.html">Direction générale</a></li><li><a href="poste-finance.html">Finance</a></li><li><a href="poste-rh.html">Ressources humaines</a></li><li><a href="poste-logistique.html">Logistique</a></li><li><a href="poste-commerce.html">Commerce</a></li></ul></div>
     <div><h4>&nbsp;</h4><ul><li><a href="poste-marketing.html">Marketing</a></li><li><a href="poste-juridique.html">Juridique</a></li><li><a href="poste-rse.html">RSE</a></li><li><a href="poste-dsi-innovation-digitale.html">DSI et innovation digitale</a></li><li><a href="poste-operations-industrielles.html">Opérations industrielles</a></li></ul></div>
-    <div><h4>Contact</h4><ul><li>[Adresse du cabinet]</li><li>[Téléphone]</li><li>[E-mail de contact]</li><li><a href="./#contact">Trouver un manager</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="./#contact">Trouver un manager</a></li><li><a href="./#faq">Questions fréquentes</a></li></ul></div>
   </div>
   <div class="footer-legal"><span>© 2026 Kistone Transition</span><span>[Mentions légales] · [Politique de confidentialité]</span></div>
 </div></footer>
 <script>
+(() => {
+  const burger = document.querySelector('.burger'), menu = document.getElementById('mobile-menu');
+  const set = (open) => { burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu'); menu.hidden = !open; document.body.classList.toggle('menu-open', open); };
+  burger.addEventListener('click', () => set(menu.hidden));
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  addEventListener('resize', () => { if (innerWidth > 1080) set(false); });
+})();
 document.querySelectorAll('form[data-contact]').forEach((f) => f.addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = f.querySelector('button[type=submit]');

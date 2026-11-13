@@ -46,4 +46,4 @@ Les formulaires envoient la demande à `/api/contact`, qui envoie un e-mail via 
 - **Sur Vercel** : Settings → Environment Variables → ajouter `RESEND_API_KEY`.
 - Options : `CONTACT_TO` (destinataire), `CONTACT_FROM` (expéditeur).
 
-À compléter : témoignages, associé fondateur, `[Téléphone]`, `[E-mail de contact]`, `[Adresse du cabinet]`, `[TJM]`, mentions légales.
+À compléter : `[TJM]`, mentions légales.
