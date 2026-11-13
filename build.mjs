@@ -187,7 +187,7 @@ ${header}
       <p>Quand une fonction clé se libère ou qu'une situation se tend, le temps joue contre l'entreprise. Notre métier : y répondre en quelques jours, avec la bonne personne.</p>
       <p>Nous accompagnons les dirigeants, actionnaires et conseils d'administration de PME, d'ETI et de groupes. Chaque mission est confiée à un manager qui a déjà mené des situations comparables, et suivie par un associé du cabinet jusqu'à son terme.</p>
       <p>Notre réseau réunit d'anciens directeurs généraux, directeurs financiers, DRH, directeurs industriels et directeurs des systèmes d'information, sélectionnés pour leur expérience, leur sens de l'engagement et leur discrétion.</p>
-      <div class="signature"><img class="ph" src="assets/alexandre-guego-avatar.jpg" alt="" width="52" height="52"><div><b>Alexandre Guégo</b><span>Associé fondateur</span></div></div>
+      <div class="signature"><div><b>Alexandre Guégo</b><span>Associé fondateur</span></div></div>
     </div>
   </div>
   <div class="pillars">
