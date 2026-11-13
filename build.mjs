@@ -36,10 +36,6 @@ const head = (title, desc) => `<!doctype html>
 <body>`;
 
 const header = `
-<div class="util"><div class="wrap">
-  <span><span class="hide-m">Cabinet de management de transition</span><span class="sep hide-m">|</span>Interventions en France et à l'international</span>
-  <span><a href="tel:+33000000000">[Téléphone]</a><span class="sep hide-m">|</span><a class="hide-m" href="./#contact">Nous écrire</a></span>
-</div></div>
 <header class="header"><div class="wrap">
   <a class="logo" href="./" aria-label="${BRAND}, accueil"><img src="assets/logo-full-black.png" alt="kistone"><span>Management<br>de transition</span></a>
   <nav class="menu" aria-label="Navigation principale">
