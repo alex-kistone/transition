@@ -135,7 +135,8 @@ form.error ~ .form-err { display: block; }
 .portrait img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: 14px; box-shadow: 0 24px 48px -28px rgba(60,40,20,.35); }
 .signature b { display: block; color: var(--ink); font-size: 15px; }
 .signature span { font-size: 13px; }
-.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 72px; border-top: 1px solid var(--line); }
+.values { margin-top: 72px; margin-bottom: 20px; }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 0; border-top: 1px solid var(--line); }
 .pillar { padding: 32px 32px 0 0; }
 .pillar + .pillar { padding-left: 32px; border-left: 1px solid var(--line); }
 .pillar .num { font-family: var(--mono); font-size: 12px; color: var(--green-text); letter-spacing: .1em; }
