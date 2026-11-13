@@ -40,7 +40,7 @@ const header = `
   <nav class="menu" aria-label="Navigation principale">
     <a href="./#cabinet">Le cabinet</a>
     <a href="./#expertises">Expertises</a>
-    <a href="./#demarche">Démarche</a>
+    <a href="./#methodologie">Méthodologie</a>
     <a href="./#garanties">Garanties</a>
     <a href="./#faq">Questions</a>
   </nav>
@@ -218,11 +218,11 @@ ${header}
   </div>
 </div></section>
 
-<section class="sec sec-dark on-dark" id="demarche">
+<section class="sec sec-dark on-dark" id="methodologie">
   ${wm('width:420px;height:690px;left:-140px;bottom:-260px;transform:rotate(-12deg)')}
   <div class="wrap">
     <div class="sec-head">
-      <div><span class="kicker">Notre démarche</span><h2>Du premier appel à la passation, un cadre éprouvé.</h2></div>
+      <div><span class="kicker">Notre méthodologie</span><h2>Du premier appel à la passation, un cadre éprouvé.</h2></div>
       <p class="lead">Quatre étapes, un associé référent, des objectifs écrits. Vous gardez la maîtrise de chaque décision.</p>
     </div>
     <div class="steps">
