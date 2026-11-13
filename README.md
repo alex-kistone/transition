@@ -12,7 +12,7 @@ Design sobre et rassurant aux couleurs Kistone (crème, encre) avec un accent ve
 ## Lancer en local
 
 ```bash
-cd kistone-transition
+cd transition
 npm run dev
 ```
 
@@ -21,15 +21,15 @@ Ouvre http://localhost:3000 (autre port : `PORT=4000 npm run dev`). Aucune dépe
 Première installation :
 
 ```bash
-git clone https://github.com/alex-kistone/kistone-transition.git
-cd kistone-transition
+git clone https://github.com/alex-kistone/transition.git
+cd transition
 npm run dev
 ```
 `npm run dev` régénère les pages, lance le serveur et **recharge le navigateur automatiquement** à chaque modification (textes dans `src/data.mjs`, gabarits dans `build.mjs`, styles dans `styles.css`). `npm start` lance seulement le serveur.
 
 ## Mise en ligne sur transition.kistone.fr (Vercel)
 
-1. Vercel → *Add New Project* → importer le dépôt `kistone-transition`, preset *Other* (racine du dépôt)
+1. Vercel → *Add New Project* → importer le dépôt `transition`, preset *Other* (racine du dépôt)
    (le `vercel.json` du dossier fixe la commande de build et les URL sans `.html`).
 2. Projet → *Settings → Domains* → ajouter `transition.kistone.fr`.
 3. Chez le gestionnaire DNS de kistone.fr : enregistrement **CNAME** `transition` → `cname.vercel-dns.com`.
