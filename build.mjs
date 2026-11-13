@@ -247,14 +247,7 @@ ${header}
   </div>
 </div></section>
 
-<section class="sec sec-paper" id="temoignages"><div class="wrap">
-  <div class="sec-head single"><span class="kicker">Ils nous ont fait confiance</span><h2>La parole à nos clients.</h2></div>
-  <div class="quotes">
-    ${[1, 2, 3].map(() => `<figure class="quote" style="margin:0"><q>[Témoignage d'un dirigeant client, deux à trois phrases sur le contexte, la rapidité d'intervention et le résultat obtenu.]</q><figcaption class="who"><b>[Prénom Nom]</b>[Fonction], [Entreprise ou secteur]</figcaption></figure>`).join('')}
-  </div>
-</div></section>
-
-<section class="sec" id="faq"><div class="wrap">
+<section class="sec sec-paper" id="faq"><div class="wrap">
   <div class="faq-grid">
     <div class="faq-side">
       <span class="kicker">Questions fréquentes</span>
