@@ -61,7 +61,7 @@ const callback = (title, sub, selected, compact = false) => {
     <div class="field"><label for="f-${k}">Fonction recherchée</label><select id="f-${k}" name="Fonction recherchée">${roles.map((r) => `<option${r.slug === selected ? ' selected' : ''}>${r.short}</option>`).join('')}<option>Autre</option></select></div>
     ${compact ? '' : `<div class="field full"><label for="m-${k}">Votre situation, en quelques mots</label><textarea id="m-${k}" name="Message" placeholder="Contexte, urgence, durée envisagée, localisation…"></textarea></div>`}
     <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-    <div class="${compact ? '' : 'full'}"><button class="btn btn-green btn-block" type="submit">Être rappelé par un associé</button></div>
+    <div class="${compact ? '' : 'full'}"><button class="btn btn-green btn-block" type="submit">Être rappelé·e par un associé</button></div>
   </form>
   <div class="form-ok" role="status">Merci. Un associé vous rappelle sous 24 h ouvrées.</div>
   <div class="form-err" role="alert">L'envoi n'a pas abouti. Réessayez ou appelez-nous au [Téléphone].</div>
@@ -165,7 +165,7 @@ ${header}
         <span>${check} Confidentialité absolue</span>
       </div>
     </div>
-    ${callback('Être rappelé par un associé', 'Décrivez votre besoin. Nous revenons vers vous sous 24 h ouvrées.', '', true)}
+    ${callback('Être rappelé·e par un associé', 'Décrivez votre besoin. Nous revenons vers vous sous 24 h ouvrées.', '', true)}
   </div>
 </section>
 
