@@ -1,6 +1,6 @@
 // Serveur local sans dépendance.
 //   npm run dev   → régénère les pages, sert le site sur http://localhost:3000 et recharge le navigateur à chaque modification
-//   npm run live  → comme dev, et récupère automatiquement les mises à jour du dépôt GitHub (git pull toutes les 15 s)
+//   npm run live  → comme dev + synchronisation GitHub (voir live.mjs)
 //   npm start     → sert le site, sans surveillance
 // Autre port : PORT=4000 npm run dev
 import { createServer } from 'node:http';
@@ -26,7 +26,7 @@ const types = {
   '.mjs': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg',
   '.webp': 'image/webp', '.ico': 'image/x-icon', '.json': 'application/json',
 };
-const blocked = /^\/(src|lib|api|node_modules|serve\.mjs|build\.mjs|package\.json|\.env)/;
+const blocked = /^\/(src|lib|api|node_modules|serve\.mjs|live\.mjs|build\.mjs|package\.json|\.env)/;
 const clients = new Set();
 const reloadScript = `<script>new EventSource('/__reload').onmessage = () => location.reload();</script>`;
 
@@ -79,11 +79,3 @@ if (dev) {
   watch(root, { recursive: true }, (_e, f) => onChange(f));
 }
 
-if (process.argv.includes('--sync')) {
-  const pull = () => execFile('git', ['pull', '--ff-only', '--quiet'], { cwd: root }, (err, _out, errOut) => {
-    if (err) console.error('Synchronisation impossible :', (errOut || err.message).trim());
-  });
-  pull();
-  setInterval(pull, 15000);
-  console.log('Synchronisation avec GitHub toutes les 15 s');
-}

@@ -27,7 +27,7 @@ npm run dev
 ```
 `npm run dev` régénère les pages, lance le serveur et **recharge le navigateur automatiquement** à chaque modification (textes dans `src/data.mjs`, gabarits dans `build.mjs`, styles dans `styles.css`). `npm start` lance seulement le serveur.
 
-**Suivre les modifications de Claude en direct** : `npm run live`. Le site récupère tout seul les mises à jour poussées sur GitHub (toutes les 15 s) et le navigateur se recharge.
+**Suivre les modifications de Claude en direct** : `npm run live`. Le site récupère tout seul les mises à jour poussées sur GitHub (toutes les 15 s), redémarre le serveur si son code change, et le navigateur se recharge.
 
 ## Mise en ligne sur transition.kistone.fr (Vercel)
 
