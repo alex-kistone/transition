@@ -199,7 +199,7 @@ ${header}
 
 <section class="sec sec-paper" id="expertises"><div class="wrap">
   <div class="sec-head">
-    <div><span class="kicker">Nos expertises</span><h2>Dix fonctions de direction, une fiche de poste pour chacune.</h2></div>
+    <div><span class="kicker">Nos expertises</span><h2>Nos domaines d'intervention.</h2></div>
     <p class="lead">Pour chaque fonction : le contexte d'intervention, les missions confiées, les livrables attendus et le profil des managers que nous présentons.</p>
   </div>
   <div class="xp-list">
