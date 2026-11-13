@@ -125,8 +125,8 @@ function home() {
   const steps = [
     ['J0', 'Cadrage', 'Un associé du cabinet qualifie avec vous la situation, le mandat et les objectifs. Échange confidentiel de 30 minutes.'],
     ['J+2', 'Présentation', 'Nous vous présentons une short-list de managers ayant déjà mené des missions comparables, références vérifiées.'],
-    ['J+7', 'Prise de fonction', 'Lettre de mission, objectifs à 100 jours, contrat tripartite. Le manager prend ses fonctions.'],
-    ['J+100', 'Suivi et passation', 'Points réguliers avec l\'associé référent, bilan des objectifs, passation organisée au successeur.'],
+    ['J+7', 'Prise de fonction', 'Lettre de mission, objectifs écrits, contrat tripartite. Le manager prend ses fonctions.'],
+    ['Pendant la mission', 'Suivi et passation', 'Points réguliers avec l\'associé référent, bilan des objectifs, passation organisée au successeur.'],
   ];
   const guarantees = [
     ['<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>', 'Confidentialité', 'Chaque mission est couverte par un engagement de confidentialité, dès le premier échange.'],
@@ -134,13 +134,13 @@ function home() {
     ['<path d="M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4"/><path d="M20 12a8 8 0 0 1-14 5.3"/><path d="M6 21v-4h4"/>', 'Continuité garantie', 'Si la mission l\'exige, nous assurons le remplacement du manager dans les meilleurs délais.'],
     ['<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h6"/>', 'Cadre contractuel clair', 'Contrat tripartite, lettre de mission et objectifs écrits. Vous savez ce que vous achetez.'],
     ['<circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/>', 'Un associé référent', 'Un interlocuteur unique au cabinet, du cadrage à la fin de mission.'],
-    ['<path d="M4 19h16"/><path d="M6 15l4-4 3 3 5-6"/>', 'Résultats mesurés', 'Des points d\'étape à 30, 60 et 100 jours sur des objectifs définis ensemble.'],
+    ['<path d="M4 19h16"/><path d="M6 15l4-4 3 3 5-6"/>', 'Résultats mesurés', 'Des points d\'étape réguliers avec vous, sur des objectifs définis ensemble dès le départ.'],
   ];
   const faq = [
     ['Qu\'est-ce qu\'un manager de transition ?', 'Un dirigeant ou un cadre supérieur expérimenté, indépendant, qui prend une fonction de direction pour une durée limitée. Il est opérationnel dès son arrivée, porte un mandat clair et quitte l\'entreprise une fois la mission accomplie.'],
     ['Sous quel délai un manager peut-il intervenir ?', 'Nous présentons une short-list sous 48 heures. Après vos entretiens, la prise de fonction intervient généralement en moins d\'une semaine.'],
     ['Quelle différence avec un cabinet de conseil ?', 'Le consultant analyse et recommande. Le manager de transition occupe la fonction : il décide, encadre les équipes et répond des résultats.'],
-    ['Comment la mission est-elle encadrée ?', 'Par un contrat tripartite entre votre entreprise, le cabinet et le manager, une lettre de mission et des objectifs à 100 jours. Un associé du cabinet suit la mission jusqu\'à son terme.'],
+    ['Comment la mission est-elle encadrée ?', 'Par un contrat tripartite entre votre entreprise, le cabinet et le manager, une lettre de mission et des objectifs écrits. Un associé du cabinet suit la mission jusqu\'à son terme.'],
     ['Comment la mission est-elle facturée ?', 'Au jour d\'intervention, selon la fonction, la séniorité et le contexte. Le tarif est fixé avec vous lors du cadrage : [TJM indicatif à préciser].'],
     ['Le manager peut-il être recruté à l\'issue de la mission ?', 'Oui, lorsque la situation s\'y prête. Les conditions sont prévues dès le départ dans le contrat.'],
   ];
@@ -172,7 +172,7 @@ ${header}
 <section class="facts" aria-label="Nos engagements"><div class="wrap">
   <div class="fact"><b>48<small>h</small></b><span>pour vous présenter une short-list de managers</span></div>
   <div class="fact"><b>1<small>sem.</small></b><span>pour la prise de fonction du manager retenu</span></div>
-  <div class="fact"><b>100<small>j</small></b><span>d'objectifs écrits dans la lettre de mission</span></div>
+  <div class="fact"><b>30<small>min</small></b><span>d'échange avec un associé pour cadrer votre besoin</span></div>
   <div class="fact"><b>10<small>fonctions</small></b><span>de direction couvertes par le cabinet</span></div>
 </div></section>
 
@@ -199,7 +199,7 @@ ${header}
 <section class="sec sec-paper" id="expertises"><div class="wrap">
   <div class="sec-head">
     <div><span class="kicker">Nos expertises</span><h2>Dix fonctions de direction, une fiche de poste pour chacune.</h2></div>
-    <p class="lead">Pour chaque fonction : le contexte d'intervention, les missions confiées, la feuille de route des 100 premiers jours et le profil des managers que nous présentons.</p>
+    <p class="lead">Pour chaque fonction : le contexte d'intervention, les missions confiées, les livrables attendus et le profil des managers que nous présentons.</p>
   </div>
   <div class="xp-list">
     ${roles.map((r, i) => `<a class="xp-row" href="${href(r)}">
@@ -288,7 +288,6 @@ ${footer}`;
 
 function job(r, i) {
   const others = roles.filter((x) => x.slug !== r.slug);
-  const phases = [['J+30', 'Diagnostic', [r.livrables[0]]], ['J+60', 'Plan et décisions', [r.livrables[1]]], ['J+100', 'Résultats et passation', r.livrables.slice(2)]];
   return `${head(`${r.title} · ${BRAND}`, `Fiche de poste : ${r.title}. ${r.pitch}`)}
 ${header}
 <main>
@@ -313,15 +312,15 @@ ${header}
     <a href="#contexte">Contexte</a>
     <a href="#situations">Situations types</a>
     <a href="#missions">Missions</a>
-    <a href="#feuille-de-route">Feuille de route</a>
+    <a href="#livrables">Livrables</a>
     <a href="#profil">Profil</a>
   </nav>
   <div class="doc">
     <section id="contexte"><span class="s-num">01</span><h2>Contexte de l'intervention</h2><p>${r.context}</p></section>
     <section id="situations"><span class="s-num">02</span><h2>Situations types</h2><div class="chips">${r.situations.map((s) => `<span>${s}</span>`).join('')}</div></section>
     <section id="missions"><span class="s-num">03</span><h2>Missions confiées</h2><ol class="olist">${r.missions.map((m) => `<li><span>${m}</span></li>`).join('')}</ol></section>
-    <section id="feuille-de-route"><span class="s-num">04</span><h2>Feuille de route des 100 premiers jours</h2>
-      <div class="phases">${phases.map(([d, t, ls], k) => `<div class="phase"><div class="d">${d}<small>PHASE 0${k + 1}</small></div><h4>${t}</h4><ul>${ls.map((l) => `<li>${check}<span>${l}</span></li>`).join('')}</ul></div>`).join('')}</div>
+    <section id="livrables"><span class="s-num">04</span><h2>Livrables attendus</h2>
+      <div class="deliverables">${r.livrables.map((l) => `<div>${check}<span>${l}</span></div>`).join('')}</div>
     </section>
     <section id="profil"><span class="s-num">05</span><h2>Profil des managers présentés</h2><ul class="ulist">${r.profil.map((p) => `<li>${check}<span>${p}</span></li>`).join('')}</ul></section>
   </div>

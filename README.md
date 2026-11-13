@@ -4,7 +4,7 @@ Site statique (HTML/CSS, sans dépendance) d'un cabinet de management de transit
 Design sobre et rassurant aux couleurs Kistone (crème, encre) avec un accent vert pastel.
 
 - `index.html` : accueil (hero et formulaire de rappel, engagements, cabinet, expertises, situations, démarche, garanties, témoignages, FAQ, contact)
-- `poste-*.html` : une fiche de poste par fonction, au format document (sommaire, sections numérotées, feuille de route à 100 jours, formulaire, impression)
+- `poste-*.html` : une fiche de poste par fonction, au format document (sommaire, sections numérotées, livrables attendus, formulaire, impression)
 - `src/data.mjs` : contenu des 10 fiches — **c'est ici qu'on modifie les textes**
 - `build.mjs` : régénère toutes les pages (`node build.mjs`)
 - `styles.css` : styles ; couleurs dans `:root` (`--green`, `--green-text`…)

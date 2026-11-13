@@ -30,7 +30,7 @@ export const roles = [
       'Conduire les négociations clés : banques, partenaires sociaux, grands clients',
       'Préparer et accompagner l\'arrivée du dirigeant permanent',
     ],
-    livrables: ['Diagnostic et feuille de route à 100 jours', 'Plan d\'actions validé par les actionnaires', 'Tableau de bord de direction', 'Passation documentée au successeur'],
+    livrables: ['Diagnostic de la situation et plan de transformation', 'Plan d\'actions validé par les actionnaires', 'Tableau de bord de direction', 'Passation documentée au successeur'],
     profil: [
       'Ancien DG ou directeur de business unit, avec une expérience P&L complète',
       'Plusieurs situations de crise ou de transformation menées jusqu\'au bout',
@@ -214,12 +214,12 @@ export const roles = [
     missions: [
       'Réaliser l\'analyse de double matérialité et cadrer le reporting',
       'Piloter le bilan carbone et construire une trajectoire de réduction',
-      'Définir la stratégie RSE et la feuille de route avec la direction',
+      'Définir la stratégie RSE et le plan d\'actions avec la direction',
       'Mettre en place la collecte des données et les indicateurs ESG',
       'Répondre aux questionnaires clients, investisseurs et notations extra-financières',
       'Former et embarquer les directions métiers',
     ],
-    livrables: ['Analyse de double matérialité', 'Bilan carbone et plan de réduction', 'Feuille de route RSE', 'Premier rapport de durabilité'],
+    livrables: ['Analyse de double matérialité', 'Bilan carbone et plan de réduction', 'Stratégie et plan d\'actions RSE', 'Premier rapport de durabilité'],
     profil: [
       'Ancien directeur ou responsable RSE en entreprise',
       'Maîtrise des référentiels : CSRD, ESRS, GHG Protocol, labels',
