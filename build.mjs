@@ -216,7 +216,7 @@ ${header}
 
 <section class="sec" id="situations"><div class="wrap">
   <div class="sec-head">
-    <div><span class="kicker">Quand intervenir</span><h2>Six situations où chaque semaine compte.</h2></div>
+    <div><span class="kicker">Quand intervenir</span><h2>Nos typologies de missions.</h2></div>
     <p class="lead">Un recrutement prend plusieurs mois. Une intervention de transition permet de sécuriser la fonction immédiatement, sans compromettre le recrutement définitif.</p>
   </div>
   <div class="grid-lines">
