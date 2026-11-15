@@ -159,6 +159,8 @@ form.error ~ .form-err { display: block; }
 /* Situations : grille à filets */
 .grid-lines { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .grid-lines > div { padding: 36px 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper); }
+.grid-lines > div.has-photo { padding-top: 0; }
+.sit-photo { display: block; max-width: none; width: calc(100% + 64px); margin: 0 -32px 28px; aspect-ratio: 16 / 9; object-fit: cover; }
 .grid-lines .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--green-ink); }
 .grid-lines h3 { margin: 14px 0 10px; }
 .grid-lines p { color: var(--text); font-size: 15px; }
@@ -323,6 +325,7 @@ form.error ~ .form-err { display: block; }
   .pillars, .grid-lines, .guarantees, .steps, .others, .footer-cols { grid-template-columns: 1fr; }
   .pillar, .pillar + .pillar { padding: 24px 0 0; border-left: 0; }
   .grid-lines > div { padding: 28px 22px; }
+  .sit-photo { width: calc(100% + 44px); margin: 0 -22px 22px; }
   .step { padding: 0; }
   .step-head::after { display: none; }
   .others a:nth-child(n) { padding-left: 4px; border-left: 0; }

@@ -9,6 +9,7 @@ const BRAND = 'Kistone Transition';
 //  - méthodologie : assets/photos/methodologie.mp4 (vidéo en fond) et/ou methodologie.jpg (image ou affiche de la vidéo)
 const PHOTO_CATEGORY = { 'logistique': 'entrepot', 'operations-industrielles': 'usine', 'rse': 'chantier' };
 const asset = (name) => existsSync(new URL(`assets/photos/${name}`, import.meta.url)) ? `assets/photos/${name}` : null;
+const SITUATION_FILES = ['vacance', 'crise', 'transformation', 'croissance', 'capital', 'retournement'];
 const rolePhoto = (r) => asset(`${r.slug}.jpg`) || asset(`${PHOTO_CATEGORY[r.slug] || 'bureau'}.jpg`);
 const mediaBg = (img, video) => {
   if (!img && !video) return '';
@@ -246,7 +247,10 @@ ${header}
     <p class="lead">Un recrutement prend plusieurs mois. Une intervention de transition permet de sécuriser la fonction immédiatement, sans compromettre le recrutement définitif.</p>
   </div>
   <div class="grid-lines">
-    ${situations.map(([t, h, p]) => `<div><span class="tag">${t}</span><h3>${h}</h3><p>${p}</p></div>`).join('')}
+    ${situations.map(([t, h, p], i) => {
+      const img = asset(`situation-${SITUATION_FILES[i]}.jpg`);
+      return `<div class="${img ? 'has-photo' : ''}">${img ? `<img class="sit-photo" src="${img}" alt="" loading="lazy">` : ''}<span class="tag">${t}</span><h3>${h}</h3><p>${p}</p></div>`;
+    }).join('')}
   </div>
 </div></section>
 

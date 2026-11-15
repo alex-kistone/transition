@@ -9,6 +9,7 @@ Déposer ici les fichiers, puis lancer `node build.mjs` (automatique avec `npm r
 | `entrepot.jpg` | En-tête de la fiche Logistique |
 | `chantier.jpg` | En-tête de la fiche RSE |
 | `<fiche>.jpg` (ex. `finance.jpg`) | Remplace la photo de catégorie pour cette fiche uniquement |
+| `situation-vacance.jpg`, `situation-crise.jpg`, `situation-transformation.jpg`, `situation-croissance.jpg`, `situation-capital.jpg`, `situation-retournement.jpg` | Photo en haut de chaque carte de « Nos typologies de missions » |
 | `methodologie.mp4` | Vidéo en fond de la section « Notre méthodologie » (muette, en boucle) |
 | `methodologie.jpg` | Image de fond de cette section, ou image affichée avant la vidéo |
 
