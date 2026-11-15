@@ -253,6 +253,14 @@ form.error ~ .form-err { display: block; }
 .others a:hover { color: var(--green-text); }
 .others small { font-family: var(--mono); font-size: 11px; color: var(--subtle); }
 
+/* Photo / vidéo de fond (assombrie pour garder le texte lisible) */
+.media-bg { position: absolute; inset: 0; z-index: -2; }
+.media-bg img, .media-bg video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.has-media::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(20,19,18,.92) 0%, rgba(20,19,18,.78) 55%, rgba(20,19,18,.55) 100%); }
+.has-media .watermark { display: none; }
+@media (max-width: 720px) { .has-media::before { background: rgba(20,19,18,.82); } }
+@media (prefers-reduced-motion: reduce) { .media-bg video { display: none; } }
+
 /* Menu mobile */
 .burger { display: none; flex: none; margin-left: auto; width: 44px; height: 44px; border: 0; border-radius: var(--r); background: transparent; cursor: pointer; padding: 0; position: relative; }
 .burger span { position: absolute; left: 11px; right: 11px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform .25s, opacity .2s; }

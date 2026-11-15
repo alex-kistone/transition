@@ -1,9 +1,21 @@
 // Génère index.html et poste-<slug>.html (version « cabinet », accent vert pastel)
 // Usage : node build.mjs
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { roles, icons } from './src/data.mjs';
 
 const BRAND = 'Kistone Transition';
+// Photos et vidéo (facultatives) : déposer les fichiers dans assets/photos/ puis `node build.mjs`.
+//  - fiche de poste : assets/photos/<slug>.jpg, sinon la photo de sa catégorie (bureau, usine, entrepot, chantier)
+//  - méthodologie : assets/photos/methodologie.mp4 (vidéo en fond) et/ou methodologie.jpg (image ou affiche de la vidéo)
+const PHOTO_CATEGORY = { 'logistique': 'entrepot', 'operations-industrielles': 'usine', 'rse': 'chantier' };
+const asset = (name) => existsSync(new URL(`assets/photos/${name}`, import.meta.url)) ? `assets/photos/${name}` : null;
+const rolePhoto = (r) => asset(`${r.slug}.jpg`) || asset(`${PHOTO_CATEGORY[r.slug] || 'bureau'}.jpg`);
+const mediaBg = (img, video) => {
+  if (!img && !video) return '';
+  return `<div class="media-bg" aria-hidden="true">${video
+    ? `<video autoplay muted loop playsinline preload="metadata"${img ? ` poster="${img}"` : ''}><source src="${video}" type="video/mp4"></video>`
+    : `<img src="${img}" alt="" loading="lazy">`}</div>`;
+};
 // Les formulaires sont envoyés à /api/contact (lib/contact.mjs → Resend). Destinataire : CONTACT_TO, par défaut aguego@kistone.fr.
 const FORM_ENDPOINT = '/api/contact';
 const out = new URL('./', import.meta.url);
@@ -238,7 +250,8 @@ ${header}
   </div>
 </div></section>
 
-<section class="sec sec-dark on-dark" id="methodologie">
+<section class="sec sec-dark on-dark${asset('methodologie.mp4') || asset('methodologie.jpg') ? ' has-media' : ''}" id="methodologie">
+  ${mediaBg(asset('methodologie.jpg'), asset('methodologie.mp4'))}
   ${wm('width:420px;height:690px;left:-140px;bottom:-260px;transform:rotate(-12deg)')}
   <div class="wrap">
     <div class="sec-head">
@@ -300,7 +313,8 @@ function job(r, i) {
   return `${head(`${r.title} · ${BRAND}`, `Fiche de poste : ${r.title}. ${r.pitch}`)}
 ${header}
 <main>
-<section class="job-head on-dark">
+<section class="job-head on-dark${rolePhoto(r) ? ' has-media' : ''}">
+  ${mediaBg(rolePhoto(r))}
   ${wm('width:420px;height:690px;right:-60px;top:-140px;transform:rotate(12deg)')}
   <div class="wrap">
     <nav class="crumbs" aria-label="Fil d'Ariane"><a href="./">Accueil</a><span>/</span><a href="./#expertises">Expertises</a><span>/</span><span style="color:var(--cream)">${r.short}</span></nav>
