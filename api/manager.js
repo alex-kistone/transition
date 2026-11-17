@@ -1,4 +1,4 @@
-// Fonction Vercel : POST /api/manager → inscription d'un manager (Supabase + notification)
+// Fonction Vercel : POST /api/manager → e-mail récapitulatif « Inscription Manager »
 import { registerManager } from '../lib/manager.mjs';
 
 export default async function handler(req, res) {
