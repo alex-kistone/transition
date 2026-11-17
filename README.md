@@ -46,4 +46,21 @@ Les formulaires envoient la demande à `/api/contact`, qui envoie un e-mail via 
 - **Sur Vercel** : Settings → Environment Variables → ajouter `RESEND_API_KEY`.
 - Options : `CONTACT_TO` (destinataire), `CONTACT_FROM` (expéditeur).
 
+## Inscription des managers (Supabase)
+
+Page `/inscription-manager` : prénom, nom, e-mail, téléphone, LinkedIn, **métier** (calé sur les 10 fiches du site),
+**TJM**, **disponibilité** (immédiate, 1 mois, 3 mois ou date), **secteurs d'activité** (choix multiple), parcours, consentement.
+Les listes sont dans `src/options.mjs`.
+
+- Envoi à `/api/manager` (`lib/manager.mjs`) → enregistrement dans la table `managers` de Supabase,
+  puis e-mail de notification à aguego@kistone.fr (Resend). Une même adresse e-mail met à jour la fiche existante.
+- La clé Supabase reste côté serveur : la table est protégée (RLS sans accès public).
+
+**Mise en place (une fois)**
+1. Créer un projet sur https://supabase.com (région Europe, ex. Paris ou Francfort).
+2. SQL Editor → coller le contenu de `supabase/migrations/20261117_managers.sql` → Run.
+3. Project Settings → API : copier **Project URL** et la clé **service_role** dans `.env` (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`)
+   et dans Vercel (Settings → Environment Variables), puis redéployer.
+4. Les inscriptions se consultent dans Supabase → Table Editor → `managers` (colonne `status` pour le suivi).
+
 À compléter : `[TJM]`, mentions légales.

@@ -2,6 +2,7 @@
 // Usage : node build.mjs
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { roles, icons } from './src/data.mjs';
+import { MANAGER_ROLES, AVAILABILITY, SECTORS } from './src/options.mjs';
 
 const BRAND = 'Kistone Transition';
 // Photos et vidéo (facultatives) : déposer les fichiers dans assets/photos/ puis `node build.mjs`.
@@ -59,6 +60,7 @@ const header = `
     <a href="./#garanties">Garanties</a>
     <a href="./#faq">Questions</a>
   </nav>
+  <a class="nav-join" href="inscription-manager">Vous êtes manager ?</a>
   <a class="btn btn-dark btn-sm" href="./#contact">Trouver un manager</a>
   <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
 </div>
@@ -68,6 +70,7 @@ const header = `
   <a href="./#methodologie">Méthodologie</a>
   <a href="./#garanties">Garanties</a>
   <a href="./#faq">Questions</a>
+  <a href="inscription-manager">Vous êtes manager ? Rejoindre le réseau</a>
   <a class="btn btn-dark btn-block" href="./#contact">Trouver un manager</a>
 </nav>
 </header>`;
@@ -102,7 +105,7 @@ const footer = `
     </div>
     <div><h4>Expertises</h4><ul>${roles.slice(0, 5).map((r) => `<li><a href="${href(r)}">${r.short}</a></li>`).join('')}</ul></div>
     <div><h4>&nbsp;</h4><ul>${roles.slice(5).map((r) => `<li><a href="${href(r)}">${r.short}</a></li>`).join('')}</ul></div>
-    <div><h4>Contact</h4><ul><li><a href="./#contact">Trouver un manager</a></li><li><a href="./#faq">Questions fréquentes</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="./#contact">Trouver un manager</a></li><li><a href="./#faq">Questions fréquentes</a></li><li><a href="inscription-manager">Devenir manager de transition</a></li></ul></div>
   </div>
   <div class="footer-legal"><span>© 2026 ${BRAND}</span><span>[Mentions légales] · [Politique de confidentialité]</span></div>
 </div></footer>
@@ -278,6 +281,15 @@ ${header}
   </div>
 </div></section>
 
+<section class="sec join-band" id="managers"><div class="wrap join-inner">
+  <div>
+    <span class="kicker">Vous êtes manager de transition</span>
+    <h2 style="margin-top:18px">Rejoignez notre réseau de dirigeants.</h2>
+    <p class="lead" style="margin-top:16px">Des missions qualifiées par un associé, un cadre contractuel géré par le cabinet, un interlocuteur unique pendant toute la mission.</p>
+  </div>
+  <a class="btn btn-dark" href="inscription-manager">Rejoindre le réseau ${arrowR}</a>
+</div></section>
+
 <section class="sec sec-paper" id="faq"><div class="wrap">
   <div class="faq-grid">
     <div class="faq-side">
@@ -369,6 +381,87 @@ ${header}
 ${footer}`;
 }
 
+function managerPage() {
+  return `${head(`Rejoindre le réseau · ${BRAND}`, 'Managers de transition : inscrivez-vous dans le réseau Kistone Transition (métier, TJM, disponibilité, secteurs).')}
+${header}
+<main>
+<section class="signup-head on-dark">
+  ${wm('width:420px;height:690px;right:-60px;top:-160px;transform:rotate(12deg)')}
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Fil d'Ariane"><a href="./">Accueil</a><span>/</span><span style="color:var(--cream)">Rejoindre le réseau</span></nav>
+    <span class="kicker" style="margin-top:28px">Espace managers</span>
+    <h1>Rejoignez le réseau Kistone Transition.</h1>
+    <p class="lead">Inscrivez-vous en deux minutes. Nous vous proposons des missions qui correspondent à votre expertise, à votre TJM et à votre disponibilité.</p>
+  </div>
+</section>
+<div class="wrap signup">
+  <aside class="signup-side">
+    <h2>Pourquoi nous rejoindre ?</h2>
+    <ul class="ulist">
+      <li>${check}<span><b>Des missions qualifiées.</b> Chaque besoin est cadré par un associé avant de vous être proposé.</span></li>
+      <li>${check}<span><b>Un cadre clair.</b> Contrat tripartite, lettre de mission et facturation gérés par le cabinet.</span></li>
+      <li>${check}<span><b>Un interlocuteur unique</b> du premier échange jusqu'à la passation.</span></li>
+      <li>${check}<span><b>Confidentialité.</b> Votre profil n'est jamais diffusé sans votre accord.</span></li>
+    </ul>
+  </aside>
+  <div class="callback signup-card">
+    <form id="manager-form" class="fields two" novalidate>
+      <div class="field"><label for="m-first">Prénom</label><input id="m-first" name="first_name" autocomplete="given-name" required></div>
+      <div class="field"><label for="m-last">Nom</label><input id="m-last" name="last_name" autocomplete="family-name" required></div>
+      <div class="field"><label for="m-email">E-mail</label><input id="m-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="m-phone">Téléphone <small>(facultatif)</small></label><input id="m-phone" name="phone" type="tel" autocomplete="tel"></div>
+      <div class="field full"><label for="m-linkedin">Profil LinkedIn <small>(facultatif)</small></label><input id="m-linkedin" name="linkedin_url" type="url" placeholder="https://www.linkedin.com/in/…" autocomplete="url"></div>
+      <div class="field full"><label for="m-role">Métier</label><select id="m-role" name="role_slug" required><option value="">Choisissez votre métier</option>${MANAGER_ROLES.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></div>
+      <div class="field"><label for="m-rate">TJM souhaité</label><div class="suffix"><input id="m-rate" name="daily_rate" type="number" inputmode="numeric" min="100" max="10000" step="50" placeholder="1 200" required><span>€ HT / jour</span></div></div>
+      <div class="field"><label for="m-avail">Disponibilité</label><select id="m-avail" name="availability" required><option value="">Choisissez</option>${AVAILABILITY.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></div>
+      <div class="field full" id="m-date-wrap" hidden><label for="m-date">Disponible à partir du</label><input id="m-date" name="available_from" type="date"></div>
+      <fieldset class="field full sectors"><legend>Secteurs d'activité <small>(un ou plusieurs)</small></legend>
+        <div class="chips-check">${SECTORS.map((sct, k) => `<label><input type="checkbox" name="sectors" value="${esc(sct)}"><span>${esc(sct)}</span></label>`).join('')}</div>
+      </fieldset>
+      <div class="field full"><label for="m-msg">Votre parcours en quelques mots <small>(facultatif)</small></label><textarea id="m-msg" name="message" placeholder="Dernières fonctions, missions de transition menées, zone géographique…"></textarea></div>
+      <label class="consent full"><input type="checkbox" name="consent" required><span>J'accepte que Kistone Transition conserve ces informations pour me proposer des missions. Je peux demander leur modification ou leur suppression à tout moment.</span></label>
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+      <div class="full"><button class="btn btn-green btn-block" type="submit">Rejoindre le réseau</button></div>
+      <div class="form-err full" role="alert"></div>
+    </form>
+    <div class="form-success" id="m-success" hidden>
+      <span class="g-icon">${svg('<path d="m5 12.5 4.5 4.5L19 7.5"/>')}</span>
+      <h3>Merci, votre inscription est enregistrée.</h3>
+      <p>Un associé du cabinet prendra contact avec vous dès qu'une mission correspond à votre profil. Vous pouvez mettre à jour vos informations à tout moment en renvoyant ce formulaire avec la même adresse e-mail.</p>
+      <a class="arrow-link" href="./">Retour à l'accueil ${arrowR}</a>
+    </div>
+  </div>
+</div>
+</main>
+<script>
+(() => {
+  const f = document.getElementById('manager-form'), avail = f.elements.availability, dateWrap = document.getElementById('m-date-wrap');
+  avail.addEventListener('change', () => { dateWrap.hidden = avail.value !== 'date'; f.elements.available_from.required = avail.value === 'date'; });
+  f.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = f.querySelector('.form-err'), btn = f.querySelector('button[type=submit]');
+    f.classList.remove('error');
+    const fd = new FormData(f);
+    const data = Object.fromEntries(fd);
+    data.sectors = fd.getAll('sectors'); data.consent = fd.has('consent'); data.source = 'transition.kistone.fr';
+    const show = (m) => { err.textContent = m; f.classList.add('error'); err.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); };
+    if (!f.checkValidity()) { f.reportValidity(); return; }
+    if (!data.sectors.length) return show('Merci de choisir au moins un secteur d’activité.');
+    btn.disabled = true; const label = btn.textContent; btn.textContent = 'Envoi en cours…';
+    try {
+      const r = await fetch('/api/manager', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.ok) throw new Error(j.error || ('Erreur ' + r.status));
+      f.hidden = true; document.getElementById('m-success').hidden = false;
+      document.getElementById('m-success').scrollIntoView({ block: 'center', behavior: 'smooth' });
+    } catch (x) { show(x.message || 'L’envoi n’a pas abouti. Réessayez dans un instant.'); btn.disabled = false; btn.textContent = label; }
+  });
+})();
+</script>
+${footer}`;
+}
+
 writeFileSync(new URL('index.html', out), home());
+writeFileSync(new URL('inscription-manager.html', out), managerPage());
 roles.forEach((r, i) => writeFileSync(new URL(href(r), out), job(r, i)));
-console.log(`index.html + ${roles.length} fiches générées.`);
+console.log(`index.html + ${roles.length} fiches + inscription-manager.html générées.`);

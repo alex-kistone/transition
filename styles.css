@@ -275,13 +275,60 @@ form.error ~ .form-err { display: block; }
 .mobile-menu > a:not(.btn) { padding: 16px 0; border-bottom: 1px solid rgba(20,19,18,.1); font-size: 17px; font-weight: 500; color: var(--ink); }
 .mobile-menu .btn { margin-top: 20px; height: 52px; }
 
+/* Lien « Vous êtes manager ? » de l'en-tête */
+.nav-join { margin-left: auto; font-size: 14.5px; font-weight: 600; color: var(--ink); padding: 10px 4px; border-bottom: 1px solid transparent; white-space: nowrap; }
+.nav-join:hover { border-bottom-color: var(--ink); }
+.nav-join + .btn { margin-left: 18px; }
+
+/* Bandeau « Rejoignez notre réseau » (accueil) */
+.join-band { background: var(--green); padding: 72px 0; }
+.join-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.join-band .kicker::before { background: var(--ink); }
+.join-band .lead { color: var(--ink); opacity: .78; max-width: 680px; }
+
+/* Page d'inscription manager */
+.signup-head { background: var(--ink); color: var(--cream); position: relative; overflow: hidden; isolation: isolate; }
+.signup-head .wrap { padding-top: 40px; padding-bottom: 64px; display: grid; gap: 18px; }
+.signup-head h1 { font-size: 52px; max-width: 860px; }
+.signup-head .lead { max-width: 720px; }
+.signup { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; padding-top: 64px; padding-bottom: 40px; align-items: start; }
+.signup-side { position: sticky; top: 110px; display: grid; gap: 22px; }
+.signup-side h2 { font-size: 28px; }
+.signup-side .ulist { gap: 18px; color: var(--text); font-size: 15.5px; }
+.signup-side b { color: var(--ink); }
+.signup-card { border: 1px solid var(--line); box-shadow: 0 20px 40px -28px rgba(60,40,20,.35); }
+.field small { font-weight: 400; color: var(--subtle); }
+.suffix { display: flex; align-items: stretch; }
+.suffix input { border-top-right-radius: 0; border-bottom-right-radius: 0; min-width: 0; }
+.suffix span { display: flex; align-items: center; padding: 0 12px; border: 1px solid #D6CEC2; border-left: 0; border-radius: 0 var(--r) var(--r) 0; background: var(--muted); font-size: 13px; color: var(--text); white-space: nowrap; }
+.sectors { border: 0; padding: 0; margin: 0; min-width: 0; }
+.sectors legend { font-size: 13px; font-weight: 500; color: var(--ink); padding: 0; margin-bottom: 8px; }
+.chips-check { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips-check label { cursor: pointer; }
+.chips-check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chips-check span { display: inline-flex; align-items: center; min-height: 38px; padding: 8px 14px; border: 1px solid #D6CEC2; border-radius: 999px; font-size: 14px; background: var(--paper); transition: background .15s, border-color .15s; }
+.chips-check label:hover span { border-color: var(--ink); }
+.chips-check input:checked + span { background: var(--green); border-color: var(--green-text); font-weight: 500; }
+.chips-check input:focus-visible + span { outline: 2px solid var(--green-text); outline-offset: 2px; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--text); line-height: 1.5; cursor: pointer; }
+.consent input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--green-text); flex: none; }
+#manager-form .form-err { margin-top: 0; }
+form.error .form-err { display: block; }
+.form-success { display: grid; gap: 14px; justify-items: start; padding: 12px 0; }
+.form-success[hidden], #manager-form[hidden], .field[hidden] { display: none !important; }
+.form-success p { color: var(--text); }
+
 /* Champ anti-spam invisible */
 .hp { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); border: 0; opacity: 0; }
 .fields > *, .field select, .field input, .callback, .side, .job-body > *, .doc, .doc section, .hero .wrap > *, .contact > *, .about > * { min-width: 0; }
 .doc h2, .job-head h1, h1, h2 { overflow-wrap: break-word; }
 
 /* Responsive */
+@media (max-width: 1280px) { .nav-join { display: none; } .header .wrap > .btn { margin-left: auto; } }
 @media (max-width: 1080px) {
+  .signup { grid-template-columns: 1fr; gap: 40px; }
+  .signup-side { position: static; }
+  .join-inner { flex-direction: column; align-items: flex-start; }
   .burger { display: block; }
   .header .btn-sm { margin-left: auto; }
   .header .btn-sm + .burger { margin-left: 8px; }
@@ -306,7 +353,10 @@ form.error ~ .form-err { display: block; }
 @media (max-width: 720px) {
   .wrap { padding: 0 16px; }
     .header .wrap { height: 64px; gap: 12px; }
-  .header .wrap > .btn { display: none; }
+  .header .wrap > .btn, .nav-join { display: none; }
+  .signup-head h1 { font-size: 34px; }
+  .wrap.signup { padding-top: 40px; padding-bottom: 24px; }
+  .join-band { padding: 56px 0; }
   .header .btn-sm + .burger { margin-left: auto; }
   .logo span { display: none; }
   .logo img { height: 32px; }

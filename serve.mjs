@@ -11,6 +11,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync, existsSync } from 'node:fs';
 import { sendContact } from './lib/contact.mjs';
+import { registerManager } from './lib/manager.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 // Charge .env (clé Resend…) sans dépendance
@@ -46,10 +47,11 @@ createServer(async (req, res) => {
     res.write(': ok\n\n'); clients.add(res); req.on('close', () => clients.delete(res));
     return;
   }
-  if (path === '/api/contact' && req.method === 'POST') {
+  const apiRoutes = { '/api/contact': sendContact, '/api/manager': registerManager };
+  if (apiRoutes[path] && req.method === 'POST') {
     let raw = ''; for await (const chunk of req) raw += chunk;
     let data = {}; try { data = JSON.parse(raw || '{}'); } catch {}
-    const { status, body } = await sendContact(data).catch((e) => (console.error(e), { status: 500, body: { ok: false, error: 'Erreur serveur' } }));
+    const { status, body } = await apiRoutes[path](data).catch((e) => (console.error(e), { status: 500, body: { ok: false, error: 'Erreur serveur' } }));
     res.writeHead(status, { 'content-type': 'application/json; charset=utf-8' });
     return res.end(JSON.stringify(body));
   }
